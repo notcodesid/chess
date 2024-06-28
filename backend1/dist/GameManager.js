@@ -4,14 +4,14 @@ var GameManager = /** @class */ (function () {
     function GameManager() {
         this.games = [];
         this.pendingUser = null;
-        this.user = [];
+        this.users = [];
     }
     GameManager.prototype.addUser = function (socket) {
-        this.user.push(socket);
+        this.users.push(socket);
         this.addHandler(socket);
     };
     GameManager.prototype.removeUser = function (socket) {
-        this.user = this.user.filter(function (user) { return user !== socket; });
+        this.users = this.users.filter(function (user) { return user !== socket; });
     };
     GameManager.prototype.addHandler = function (socket) {
         var _this = this;
@@ -19,7 +19,7 @@ var GameManager = /** @class */ (function () {
             var message = JSON.parse(data.toString());
             if (message.type === INIT_GAME) {
                 if (_this.pendingUser) {
-                    //start a game 
+                    // Start a game
                     var game = new Game(_this.pendingUser, socket);
                     _this.games.push(game);
                     _this.pendingUser = null;
