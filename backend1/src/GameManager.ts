@@ -2,7 +2,7 @@ import { WebSocket } from "ws";
 import { INIT_GAME, MOVE } from "./messages";
 import { Game } from "./Game";
 
-export class GameManager {
+export default class GameManager {
 
     private games : Game[];
     private pendingUser : WebSocket | null;
